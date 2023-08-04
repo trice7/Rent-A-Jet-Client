@@ -1,7 +1,7 @@
 // import { Button } from 'react-bootstrap'; // TODO: COMMENT IN FOR AUTH
 // import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
-import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
 
+import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
 import FlightCard from '../components/FlightCard';
 
 function Home() {
