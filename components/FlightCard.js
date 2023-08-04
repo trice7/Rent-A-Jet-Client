@@ -1,4 +1,5 @@
 import { Card, Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 const FlightCard = () => {
   console.warn('On the flight card page');
@@ -12,7 +13,9 @@ const FlightCard = () => {
         <Card.Text>
           Price per seat: $236.99
         </Card.Text>
-        <Button variant="primary">Book Flight</Button>
+        <Link href="/bookings/new" passHref>
+          <Button variant="primary">Book Flight</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
