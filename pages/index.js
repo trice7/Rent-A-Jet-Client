@@ -1,13 +1,18 @@
-// import { Button } from 'react-bootstrap'; // TODO: COMMENT IN FOR AUTH
-// import { signOut } from '../utils/auth'; // TODO: COMMENT IN FOR AUTH
-
-import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
+import { useAuth } from '../utils/context/authContext';
 import FlightCard from '../components/FlightCard';
+import { getAllFlights } from '../api/flightData';
 
 function Home() {
   const { user } = useAuth(); // TODO: COMMENT IN FOR AUTH
+  const [flights, setFlights] = useState([]);
 
-  // const user = { displayName: 'Rent-A-Jet Team' }; // TODO: COMMENT OUT FOR AUTH
+  useEffect(() => {
+    getAllFlights().then(setFlights);
+  }, []);
+  console.warn(flights);
+
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
@@ -19,7 +24,9 @@ function Home() {
       }}
     >
       <h1>Hello {user.displayName}! </h1>
-      <FlightCard />
+      {flights ? flights.map((card) => (
+        <FlightCard key={card.id} obj={card} />
+      )) : 'No flights retrieved'}
     </div>
   );
 }
