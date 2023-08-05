@@ -1,20 +1,38 @@
-import { Card, Button } from 'react-bootstrap';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import UserCard from '../components/User';
 import { useAuth } from '../utils/context/authContext';
-import { signOut } from '../utils/auth';
+import { getUserFlightBookings } from '../api/mergeData';
+import BookingCard from '../components/BookingCard';
 
-const Profile = () => {
+export default function Profile() {
   const { user } = useAuth();
+  const [bookings, setBookings] = useState([]);
+
+  const userFlights = () => {
+    getUserFlightBookings(user.uid).then(setBookings);
+  };
+
+  useEffect(() => {
+    userFlights();
+  }, []);
+
+  const profileUser = {
+    name: user.displayName,
+    email: user.email,
+    last_login: user.metadata.lastSignInTime,
+    image: user.photoURL,
+  };
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={user.photoURL} />
-      <Card.Body>
-        <Card.Title>{user.displayName}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{user.email}</Card.Subtitle>
-        <Button type="button" variant="danger" onClick={signOut}>Sign Out</Button>
-      </Card.Body>
-    </Card>
-  );
-};
+    <div className="text-center my-4">
+      <div className="d-flex flex-wrap">
+        <UserCard userObj={profileUser} />
 
-export default Profile;
+        {bookings?.map((card) => (
+          <BookingCard key={card.id} obj={card} onUpdate={userFlights} />
+        ))}
+      </div>
+    </div>
+  );
+}
