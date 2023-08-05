@@ -17,7 +17,6 @@ export default function Profile() {
     userFlights();
   }, []);
 
-  console.warn(bookings);
   const profileUser = {
     name: user.displayName,
     email: user.email,

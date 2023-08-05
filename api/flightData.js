@@ -70,10 +70,23 @@ const deleteFlightBooking = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleBooking = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/bookings/${id}.json`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getAllFlights,
   getSingleFlight,
   updateFlightBooking,
   deleteFlightBooking,
   createFlightBooking,
+  getSingleBooking,
 };

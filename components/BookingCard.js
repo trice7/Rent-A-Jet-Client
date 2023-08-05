@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { Button, Card } from 'react-bootstrap';
 import { deleteFlightBooking, getSingleFlight } from '../api/flightData';
 import { useAuth } from '../utils/context/authContext';
@@ -29,7 +29,10 @@ const BookingCard = ({ obj, onUpdate }) => {
           Departure Date: {obj.date}
         </Card.Text>
         <Card.Subtitle className="mb-2 text-muted"> Payment: {obj.paymentMethod} </Card.Subtitle>
-        <Button variant="primary">Edit Flight</Button>
+        <Link href={`/bookings/edit/${obj.id}`} passHref>
+          <Button variant="primary">Edit Flight</Button>
+        </Link>
+
         <Button variant="danger" onClick={deleteThisBooking}>Cancel Flight</Button>
       </Card.Body>
     </Card>
@@ -39,9 +42,11 @@ const BookingCard = ({ obj, onUpdate }) => {
 export default BookingCard;
 
 BookingCard.propTypes = {
-  obj: {
+  obj: PropTypes.shape({
     flightId: PropTypes.string,
     date: PropTypes.string,
-  }.isRequired,
+    id: PropTypes.string,
+    paymentMethod: PropTypes.string,
+  }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
