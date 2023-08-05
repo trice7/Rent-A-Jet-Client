@@ -3,9 +3,10 @@ import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
 import Signin from '../components/Signin';
 import NavBarAuth from '../components/NavBarAuth';
+import RegisterForm from '../components/form/RegisterForm';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
-  const { user, userLoading } = useAuth();
+  const { user, userLoading, updateUser } = useAuth();
 
   // if user state is null, then show loader
   if (userLoading) {

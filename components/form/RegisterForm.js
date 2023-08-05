@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { registerUser } from '../utils/auth'; // Update with path to registerUser
+import { registerUser } from '../../utils/auth';
+import AirportSelection from './AirportSelect';
+import { getAllAirports } from '../../api/airportData';
 
 function RegisterForm({ user, updateUser }) {
   const [formData, setFormData] = useState({
@@ -14,6 +16,11 @@ function RegisterForm({ user, updateUser }) {
     homeAirport: 0,
     uid: user.uid,
   });
+  const [airports, setAirports] = useState([]);
+
+  useEffect(() => {
+    getAllAirports().then((data) => setAirports(data));
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,10 +44,22 @@ function RegisterForm({ user, updateUser }) {
         <Form.Control as="textarea" name="profileImage" required placeholder="Enter a Profile Photo URL" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         <Form.Text className="text-muted">Profile Photo URL</Form.Text>
         {/* PHONE NUMBER  */}
-        <NumericInput required name="phoneNumber" className="form-control" style={ false } onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
-        <Form.Text className="text-muted">Phone Number</Form.Text>
-        
 
+        <Form.Group>
+          <Form.Control
+            className="phoneNumberInput form-control"
+            required
+            name="phoneNumber"
+            type="number"
+            maxLength="10"
+            onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          />
+        </Form.Group>
+
+        <Form.Select aria-label="Select Airport" required name="homeAirport" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}>
+          <option>Select Home Airport</option>
+          {airports.map((airport) => (<AirportSelection key={airport.id} id={airport.id} city={airport.city} code={airport.code} />))}
+        </Form.Select>
 
       </Form.Group>
       <Button variant="primary" type="submit">
