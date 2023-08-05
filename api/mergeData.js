@@ -1,9 +1,27 @@
-import clientCredentials from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
 const getAllFlightBookings = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/flightBooking.json`, {
+  fetch(`${endpoint}/bookings.json`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
+const getUserFlightBookings = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/bookings.json?orderBy="customerId"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -21,7 +39,7 @@ const getAllFlightBookings = () => new Promise((resolve, reject) => {
 });
 
 const getSingleFlightBooking = (flightId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/flightBooking/${flightId}.json`, {
+  fetch(`${endpoint}/bookings/${flightId}.json`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -35,4 +53,5 @@ const getSingleFlightBooking = (flightId) => new Promise((resolve, reject) => {
 export {
   getAllFlightBookings,
   getSingleFlightBooking,
+  getUserFlightBookings,
 };
