@@ -44,7 +44,7 @@ function FlightBookingForm({ existingBooking }) {
       createFlightBooking(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateFlightBooking(patchPayload).then(() => {
-          router.push('/profile');
+          router.push('/Profile');
         });
       });
     }
