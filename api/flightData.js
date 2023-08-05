@@ -59,7 +59,7 @@ const updateFlightBooking = (payload) => new Promise((resolve, reject) => {
 });
 
 const deleteFlightBooking = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/flights/${firebaseKey}.json`, {
+  fetch(`${endpoint}/bookings/${firebaseKey}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
