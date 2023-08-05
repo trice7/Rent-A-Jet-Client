@@ -14,7 +14,7 @@ const EditBooking = () => {
   console.warn(editItem);
 
   // TODO: change obj to the prop used in the form once the form is completed
-  return (<FlightBookingForm obj={editItem} />);
+  return (<FlightBookingForm existingBooking={editItem} />);
 };
 
 export default EditBooking;
