@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function AirportSelection({ id, city, code }) {
   return (
-    <option key={`select--${id}`} value={Number(id)}>{code} : {city}</option>
+    <option key={`select--${id}`} value={id}>{code} : {city}</option>
   );
 }
 
