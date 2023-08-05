@@ -31,20 +31,21 @@ function RegisterForm({ user, updateUser }) {
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Customer Info</Form.Label>
+        <div>___________________</div>
         {/* FIRST NAME  */}
-        <Form.Control as="textarea" name="firstName" required placeholder="Enter First Name" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         <Form.Text className="text-muted">First Name</Form.Text>
+        <Form.Control as="textarea" name="firstName" required placeholder="Enter First Name" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         {/* LAST NAME  */}
-        <Form.Control as="textarea" name="lastName" required placeholder="Enter Last Name" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         <Form.Text className="text-muted">Last Name</Form.Text>
+        <Form.Control as="textarea" name="lastName" required placeholder="Enter Last Name" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         {/* EMAIL  */}
-        <Form.Control as="email" name="email" required placeholder="Enter your Email" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         <Form.Text className="text-muted">Email</Form.Text>
+        <Form.Control as="textarea" name="email" required placeholder="Enter your Email" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         {/* PROFILE PIC  */}
-        <Form.Control as="textarea" name="profileImage" required placeholder="Enter a Profile Photo URL" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         <Form.Text className="text-muted">Profile Photo URL</Form.Text>
+        <Form.Control as="textarea" name="profileImage" required placeholder="Enter a Profile Photo URL" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
         {/* PHONE NUMBER  */}
-
+        <Form.Text className="text-muted">Phone Number</Form.Text>
         <Form.Group>
           <Form.Control
             className="phoneNumberInput form-control"
@@ -55,15 +56,15 @@ function RegisterForm({ user, updateUser }) {
             onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
           />
         </Form.Group>
-
-        <Form.Select aria-label="Select Airport" required name="homeAirport" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}>
+        <Form.Text className="text-muted">Home Airport</Form.Text>
+        <Form.Select aria-label="Select Airport" required name="homeAirport" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: Number(target.value) }))}>
           <option>Select Home Airport</option>
           {airports.map((airport) => (<AirportSelection key={airport.id} id={airport.id} city={airport.city} code={airport.code} />))}
         </Form.Select>
 
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        Register Account
       </Button>
     </Form>
   );

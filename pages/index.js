@@ -23,7 +23,7 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>Hello {user.displayName}! </h1>
+      <h1>Hello {user.first_name}! </h1>
       {flights ? flights.map((card) => (
         <FlightCard key={card.id} obj={card} />
       )) : 'No flights retrieved'}
