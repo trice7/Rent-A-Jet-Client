@@ -11,7 +11,6 @@ function Home() {
   useEffect(() => {
     getAllFlights().then(setFlights);
   }, []);
-  console.warn(flights);
 
   return (
     <div
