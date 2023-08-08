@@ -18,6 +18,9 @@ function FlightBookingForm({ existingBooking }) {
   const [formInput, setFormInput] = useState(initialState);
   const [flights, setFlights] = useState([]);
   const router = useRouter();
+  if (router.query) {
+    initialState.flightId = router.query.flightId;
+  }
   const { user } = useAuth();
 
   useEffect(() => {

@@ -30,7 +30,7 @@ const BookingCard = ({ obj, onUpdate }) => {
         </Card.Text>
         <Card.Subtitle className="mb-2 text-muted"> Payment: {obj.paymentMethod} </Card.Subtitle>
         <Link href={`/bookings/edit/${obj.id}`} passHref>
-          <Button variant="primary">Edit Flight</Button>
+          <Button variant="primary">Edit Booking</Button>
         </Link>
 
         <Button variant="danger" onClick={deleteThisBooking}>Cancel Flight</Button>
