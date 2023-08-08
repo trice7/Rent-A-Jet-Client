@@ -18,7 +18,9 @@ function FlightBookingForm({ existingBooking }) {
   const [formInput, setFormInput] = useState(initialState);
   const [flights, setFlights] = useState([]);
   const router = useRouter();
+  // https://stackoverflow.com/questions/43862600/how-can-i-get-query-string-parameters-from-the-url-in-next-js
   if (router.query) {
+    console.warn(router.query);
     initialState.flightId = router.query.flightId;
   }
   const { user } = useAuth();
