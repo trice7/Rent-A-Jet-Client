@@ -23,7 +23,7 @@ const FlightCard = ({ obj }) => {
         <Card.Text>
           Price per seat: ${obj.price}
         </Card.Text>
-        <Link href="/bookings/new" passHref>
+        <Link href={{ pathname: '/bookings/new', query: { flightId: obj.id } }} passHref>
           <Button variant="primary">Book Flight</Button>
         </Link>
       </Card.Body>
@@ -34,8 +34,11 @@ const FlightCard = ({ obj }) => {
 export default FlightCard;
 
 FlightCard.propTypes = {
-  obj: {
+  obj: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
+    departureAirportId: PropTypes.string,
+    destinationAirportId: PropTypes.string,
     price: PropTypes.string,
-  }.isRequired,
+  }).isRequired,
 };
