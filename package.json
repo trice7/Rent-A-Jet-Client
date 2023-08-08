@@ -1,8 +1,8 @@
 {
-  "name": "next-firebase-starter",
+  "name": "Rent-A-Jet",
   "private": true,
   "version": "1.0.0",
-  "author": "Trinity Christiana",
+  "author": "Kirthana Sukumaran, Thomas Rice, Ryan Bigelow, Wesley Vance",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
