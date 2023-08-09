@@ -47,7 +47,7 @@ BookingCard.propTypes = {
   obj: PropTypes.shape({
     flightId: PropTypes.string,
     date: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
     paymentMethod: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
