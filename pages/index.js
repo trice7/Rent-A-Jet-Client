@@ -15,16 +15,16 @@ function Home() {
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
+      // style={{
+      //   height: '90vh',
+      //   padding: '30px',
+      //   maxWidth: '400px',
+      //   margin: '0 auto',
+      // }}
     >
       <h1>Hello {user.first_name}! </h1>
-      {flights ? flights.map((card) => (
-        <FlightCard key={card.id} obj={card} />
+      {flights ? flights.map((flight) => (
+        <FlightCard key={flight.id} name={flight.name} obj={flight} departureAirportId={flight.departure_airport_id.id} destinationAirportId={flight.destination_airport_id.id} />
       )) : 'No flights retrieved'}
     </div>
   );

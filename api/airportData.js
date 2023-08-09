@@ -21,7 +21,7 @@ const getAllAirports = () => new Promise((resolve, reject) => {
 });
 
 const getSingleAirport = (airportId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/airports/${airportId}.json`, {
+  fetch(`${endpoint}/airports/${airportId}`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
