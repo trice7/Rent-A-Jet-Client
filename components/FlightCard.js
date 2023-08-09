@@ -8,13 +8,11 @@ import { getSingleAirport } from '../api/airportData';
 const FlightCard = ({
   obj, departureAirportId, destinationAirportId, name,
 }) => {
-  console.warn('On the flight card page');
   const [departingAirport, setDepartingAirport] = useState({});
   const [arrivalAirport, setArrivalAirport] = useState({});
   useEffect(() => {
     getSingleAirport(departureAirportId).then(setDepartingAirport);
     getSingleAirport(destinationAirportId).then(setArrivalAirport);
-    console.warn(departureAirportId);
   }, []);
 
   return (
@@ -38,13 +36,13 @@ export default FlightCard;
 
 FlightCard.propTypes = {
   obj: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     departureAirportId: PropTypes.string,
     destinationAirportId: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
   }).isRequired,
-  departureAirportId: PropTypes.shape.isRequired,
-  destinationAirportId: PropTypes.shape.isRequired,
+  departureAirportId: PropTypes.number.isRequired,
+  destinationAirportId: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
 };

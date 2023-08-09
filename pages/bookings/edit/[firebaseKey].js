@@ -11,7 +11,6 @@ const EditBooking = () => {
   useEffect(() => {
     getSingleBooking(firebaseKey).then(setEditItem);
   }, [firebaseKey]);
-  console.warn(editItem);
 
   // TODO: change obj to the prop used in the form once the form is completed
   return (<FlightBookingForm existingBooking={editItem} />);
