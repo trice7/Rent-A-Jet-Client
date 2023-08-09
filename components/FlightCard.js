@@ -5,19 +5,22 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getSingleAirport } from '../api/airportData';
 
-const FlightCard = ({ obj }) => {
+const FlightCard = ({
+  obj, departureAirportId, destinationAirportId, name,
+}) => {
   console.warn('On the flight card page');
   const [departingAirport, setDepartingAirport] = useState({});
   const [arrivalAirport, setArrivalAirport] = useState({});
   useEffect(() => {
-    getSingleAirport(obj.departureAirportId).then(setDepartingAirport);
-    getSingleAirport(obj.destinationAirportId).then(setArrivalAirport);
+    getSingleAirport(departureAirportId).then(setDepartingAirport);
+    getSingleAirport(destinationAirportId).then(setArrivalAirport);
+    console.warn(departureAirportId);
   }, []);
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{obj.name}</Card.Title>
+        <Card.Title>{name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Departing From: {departingAirport ? departingAirport.city : 'Error'}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">Headed To: {arrivalAirport ? arrivalAirport.city : 'error'}</Card.Subtitle>
         <Card.Text>
@@ -41,4 +44,7 @@ FlightCard.propTypes = {
     destinationAirportId: PropTypes.string,
     price: PropTypes.string,
   }).isRequired,
+  departureAirportId: PropTypes.shape.isRequired,
+  destinationAirportId: PropTypes.shape.isRequired,
+  name: PropTypes.string.isRequired,
 };
