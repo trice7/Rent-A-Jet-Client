@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { getSingleAirport } from '../api/airportData';
 
 const FlightCard = ({
-  obj, departureAirportId, destinationAirportId, name,
+  obj, departureAirportId, destinationAirportId, name, price,
 }) => {
   console.warn('On the flight card page');
   const [departingAirport, setDepartingAirport] = useState({});
@@ -14,7 +14,6 @@ const FlightCard = ({
   useEffect(() => {
     getSingleAirport(departureAirportId).then(setDepartingAirport);
     getSingleAirport(destinationAirportId).then(setArrivalAirport);
-    console.warn(departureAirportId);
   }, []);
 
   return (
@@ -24,7 +23,7 @@ const FlightCard = ({
         <Card.Subtitle className="mb-2 text-muted">Departing From: {departingAirport ? departingAirport.city : 'Error'}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">Headed To: {arrivalAirport ? arrivalAirport.city : 'error'}</Card.Subtitle>
         <Card.Text>
-          Price per seat: ${obj.price}
+          Price per seat: ${price}
         </Card.Text>
         <Link href={{ pathname: '/bookings/new', query: { flightId: obj.id } }} passHref>
           <Button variant="primary">Book Flight</Button>
@@ -47,4 +46,5 @@ FlightCard.propTypes = {
   departureAirportId: PropTypes.shape.isRequired,
   destinationAirportId: PropTypes.shape.isRequired,
   name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
 };

@@ -24,7 +24,7 @@ function Home() {
     >
       <h1>Hello {user.first_name}! </h1>
       {flights ? flights.map((flight) => (
-        <FlightCard key={flight.id} name={flight.name} obj={flight} departureAirportId={flight.departure_airport_id.id} destinationAirportId={flight.destination_airport_id.id} />
+        <FlightCard key={flight.id} name={flight.name} obj={flight} departureAirportId={flight.departure_airport_id.id} destinationAirportId={flight.destination_airport_id.id} price={flight.price} />
       )) : 'No flights retrieved'}
     </div>
   );

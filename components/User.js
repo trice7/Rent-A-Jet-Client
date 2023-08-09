@@ -7,10 +7,10 @@ function UserCard({ userObj }) {
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
-        <h2>{userObj.name}</h2>
+        <h2>{userObj.first_name} {userObj.last_name} </h2>
         <p className="card-text bold">{userObj.email}</p>
-        <p className="card-text bold">{userObj.last_login}</p>
-        <img src={userObj.image} alt="" />
+        {/* <p className="card-text bold">{userObj.last_login}</p> */}
+        <img style={{ maxWidth: '100px' }} src={userObj.profile_image} alt="" />
       </Card.Body>
     </Card>
   );
@@ -18,10 +18,10 @@ function UserCard({ userObj }) {
 
 UserCard.propTypes = {
   userObj: PropTypes.shape({
-    name: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
     email: PropTypes.string,
-    last_login: PropTypes.string,
-    image: PropTypes.string,
+    profile_image: PropTypes.string,
   }).isRequired,
 };
 
