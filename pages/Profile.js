@@ -10,7 +10,7 @@ export default function Profile() {
   const [bookings, setBookings] = useState([]);
 
   const userFlights = () => {
-    getUserFlightBookings(user.uid).then(setBookings);
+    getUserFlightBookings(user.id).then(setBookings);
   };
 
   useEffect(() => {
@@ -18,9 +18,9 @@ export default function Profile() {
   }, []);
 
   const profileUser = {
-    name: user.displayName,
+    firstName: user.first_name,
     email: user.email,
-    last_login: user.metadata.lastSignInTime,
+    // last_login: user.metadata.lastSignInTime,
     image: user.photoURL,
   };
 
@@ -30,7 +30,7 @@ export default function Profile() {
         <UserCard userObj={profileUser} />
 
         {bookings?.map((card) => (
-          <BookingCard key={card.id} obj={card} onUpdate={userFlights} />
+          <BookingCard key={card.id} obj={card} paymentMethod={card.payment_method} flightname={card.flight_id.name} date={card.date} onUpdate={userFlights} />
         ))}
       </div>
     </div>

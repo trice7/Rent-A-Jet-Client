@@ -21,7 +21,7 @@ const getAllFlightBookings = () => new Promise((resolve, reject) => {
 });
 
 const getUserFlightBookings = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/bookings.json?orderBy="customerId"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/flight_bookings?customer_id=${uid}`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',

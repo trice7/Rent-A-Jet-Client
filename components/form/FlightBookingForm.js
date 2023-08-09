@@ -45,7 +45,7 @@ function FlightBookingForm({ existingBooking }) {
     if (existingBooking.id) {
       updateFlightBooking(formInput).then(() => router.push('/Profile'));
     } else {
-      const payload = { ...formInput, customerId: user.uid };
+      const payload = { ...formInput, customerId: user.id };
       createFlightBooking(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateFlightBooking(patchPayload).then(() => {
