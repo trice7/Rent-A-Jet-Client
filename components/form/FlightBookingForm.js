@@ -8,8 +8,9 @@ import { useAuth } from '../../utils/context/authContext';
 import { getAllFlights, createFlightBooking, updateFlightBooking } from '../../api/flightData';
 
 const initialState = {
-  id: '',
-  flightId: '',
+  id: 0,
+  customerId: 0,
+  flightId: 0,
   date: '',
   paymentMethod: '',
 };
@@ -20,7 +21,6 @@ function FlightBookingForm({ existingBooking }) {
   const router = useRouter();
   // https://stackoverflow.com/questions/43862600/how-can-i-get-query-string-parameters-from-the-url-in-next-js
   if (router.query) {
-    console.warn(router.query);
     initialState.flightId = router.query.flightId;
   }
   const { user } = useAuth();
@@ -28,7 +28,13 @@ function FlightBookingForm({ existingBooking }) {
   useEffect(() => {
     getAllFlights().then(setFlights);
     if (existingBooking.id) {
-      setFormInput(existingBooking);
+      setFormInput({
+        id: existingBooking.id,
+        customerId: existingBooking.customer_id.id,
+        flightId: existingBooking.flight_id.id,
+        date: existingBooking.date,
+        paymentMethod: existingBooking.payment_method,
+      });
     }
   }, [existingBooking, user]);
 
@@ -116,10 +122,15 @@ function FlightBookingForm({ existingBooking }) {
 
 FlightBookingForm.propTypes = {
   existingBooking: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     date: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    flightId: PropTypes.string,
+    payment_method: PropTypes.string,
+    flight_id: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+    customer_id: PropTypes.shape({
+      id: PropTypes.number,
+    }),
   }),
 };
 
