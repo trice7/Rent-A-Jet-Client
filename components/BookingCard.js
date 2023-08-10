@@ -7,7 +7,7 @@ import { deleteFlightBooking } from '../api/flightData';
 import { useAuth } from '../utils/context/authContext';
 
 const BookingCard = ({
-  obj, onUpdate, paymentMethod, flightname, date,
+  obj, onUpdate, paymentMethod, flightname, date, cost,
 }) => {
   const { user } = useAuth();
   // const [flight, setFlight] = useState({});
@@ -30,7 +30,7 @@ const BookingCard = ({
         <Card.Text>
           Departure Date: {date}
         </Card.Text>
-        <Card.Subtitle className="mb-2 text-muted"> Payment: {paymentMethod} </Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted"> Payment: ${cost} using {paymentMethod} </Card.Subtitle>
         <Link href={`/bookings/edit/${obj.id}`} passHref>
           <Button variant="primary">Edit Booking</Button>
         </Link>
@@ -54,4 +54,5 @@ BookingCard.propTypes = {
   paymentMethod: PropTypes.string.isRequired,
   flightname: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  cost: PropTypes.number.isRequired,
 };
