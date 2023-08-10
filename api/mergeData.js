@@ -20,7 +20,7 @@ const getAllFlightBookings = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUserFlightBookings = (uid) => new Promise((resolve, reject) => {
+const getUserFlightBookings = (uid, searchTerm = null) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/flight_bookings?customer_id=${uid}`, {
     method: 'GET',
     headers: {
@@ -30,7 +30,16 @@ const getUserFlightBookings = (uid) => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        resolve(Object.values(data));
+        const result = Object.values(data);
+        if (searchTerm) {
+          const filteredResult = result.filter((b) => b.flight_id.departure_airport_id.city.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            || b.flight_id.departure_airport_id.code.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            || b.flight_id.destination_airport_id.city.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            || b.flight_id.destination_airport_id.code.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+          resolve(filteredResult);
+        } else {
+          resolve(result);
+        }
       } else {
         resolve([]);
       }

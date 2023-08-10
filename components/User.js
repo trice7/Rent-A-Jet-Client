@@ -23,7 +23,11 @@ UserCard.propTypes = {
     email: PropTypes.string,
     profile_image: PropTypes.string,
     phone_number: PropTypes.number,
-    home_airport: PropTypes.shape,
+    home_airport: PropTypes.shape({
+      id: PropTypes.number,
+      city: PropTypes.string,
+      code: PropTypes.string,
+    }),
   }).isRequired,
 };
 
