@@ -49,6 +49,7 @@ function FlightBookingForm({ existingBooking }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (existingBooking.id) {
+      console.warn(formInput);
       updateFlightBooking(formInput).then(() => router.push('/Profile'));
     } else {
       const payload = { ...formInput, customerId: user.id };
