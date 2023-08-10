@@ -17,13 +17,6 @@ export default function Profile() {
     userFlights();
   }, []);
 
-  // const profileUser = {
-  //   firstName: user.first_name,
-  //   email: user.email,
-  //   // last_login: user.metadata.lastSignInTime,
-  //   image: user.profile_image,
-  // };
-
   return (
     <div className="text-center my-4">
       <div className="d-flex flex-wrap">
