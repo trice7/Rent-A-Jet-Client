@@ -10,5 +10,5 @@ export default function AirportSelection({ id, city, code }) {
 AirportSelection.propTypes = {
   id: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
-  code: PropTypes.number.isRequired,
+  code: PropTypes.string.isRequired,
 };

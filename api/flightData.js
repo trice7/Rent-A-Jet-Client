@@ -83,6 +83,24 @@ const getSingleBooking = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getFlightsByDeparture = (departureId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/flights?departure_airport_id=${departureId}`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getAllFlights,
   getSingleFlight,
@@ -90,4 +108,5 @@ export {
   deleteFlightBooking,
   createFlightBooking,
   getSingleBooking,
+  getFlightsByDeparture,
 };
