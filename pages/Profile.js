@@ -23,7 +23,7 @@ export default function Profile() {
         <UserCard userObj={user} />
 
         {bookings?.map((card) => (
-          <BookingCard key={card.id} obj={card} paymentMethod={card.payment_method} flightname={card.flight_id.name} date={card.date} onUpdate={userFlights} />
+          <BookingCard key={card.id} obj={card} paymentMethod={card.payment_method} flightname={card.flight_id.name} date={card.date} onUpdate={userFlights} cost={card.flight_id.price} />
         ))}
       </div>
     </div>
