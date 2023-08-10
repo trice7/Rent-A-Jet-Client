@@ -49,15 +49,13 @@ function FlightBookingForm({ existingBooking }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (existingBooking.id) {
+      console.warn(formInput);
       updateFlightBooking(formInput).then(() => router.push('/Profile'));
     } else {
       const payload = { ...formInput, customerId: user.id };
-      createFlightBooking(payload).then(({ name }) => {
-        const patchPayload = { id: name };
-        updateFlightBooking(patchPayload).then(() => {
-          router.push('/Profile');
-        });
-      });
+      createFlightBooking(payload).then(
+        router.push('/Profile'),
+      );
     }
   };
 

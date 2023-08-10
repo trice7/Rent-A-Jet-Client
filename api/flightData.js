@@ -47,15 +47,17 @@ const createFlightBooking = (payload) => new Promise((resolve, reject) => {
 
 const updateFlightBooking = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/flight_bookings/${payload.id}`, {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    // .then((response) => response.json())
+    .then(resolve)
     .catch(reject);
+  // .then((data) => resolve(data))
+  // .catch(reject);
 });
 
 const deleteFlightBooking = (firebaseKey) => new Promise((resolve, reject) => {
