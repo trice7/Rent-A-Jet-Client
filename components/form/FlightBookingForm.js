@@ -3,9 +3,14 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { getAllFlights, createFlightBooking, updateFlightBooking } from '../../api/flightData';
+import {
+  getAllFlights,
+  createFlightBooking,
+  updateFlightBooking,
+  getSingleFlight,
+} from '../../api/flightData';
 
 const initialState = {
   id: 0,
@@ -13,12 +18,14 @@ const initialState = {
   flightId: 0,
   date: '',
   paymentMethod: '',
+  price: '',
 };
 
 function FlightBookingForm({ existingBooking }) {
   const [formInput, setFormInput] = useState(initialState);
   const [flights, setFlights] = useState([]);
   const router = useRouter();
+  const [priceHandler, setPriceHandler] = useState(30000);
   // https://stackoverflow.com/questions/43862600/how-can-i-get-query-string-parameters-from-the-url-in-next-js
   if (router.query) {
     initialState.flightId = router.query.flightId;
@@ -34,6 +41,7 @@ function FlightBookingForm({ existingBooking }) {
         flightId: existingBooking.flight_id.id,
         date: existingBooking.date,
         paymentMethod: existingBooking.payment_method,
+        price: existingBooking.price,
       });
     }
   }, [existingBooking, user]);
@@ -59,6 +67,19 @@ function FlightBookingForm({ existingBooking }) {
     }
   };
 
+  const handlePriceChange = (e) => {
+    e.preventDefault();
+    // handleChange(e);
+    getSingleFlight(e.target.value).then((obj) => {
+      setPriceHandler(obj.price);
+      handleChange(e);
+      console.warn(priceHandler);
+    });
+    // const select = e.target.value.price;
+    // setPriceHandler(select);
+    // handleChange(e);
+  };
+
   return (
 
     <Form onSubmit={handleSubmit}>
@@ -67,7 +88,7 @@ function FlightBookingForm({ existingBooking }) {
         <Form.Select
           aria-label="Flight Name"
           name="flightId"
-          onChange={handleChange}
+          onChange={handlePriceChange}
           className="mb-3"
           value={formInput.flightId}
           required
@@ -112,6 +133,15 @@ function FlightBookingForm({ existingBooking }) {
         </Form.Select>
       </FloatingLabel>
 
+      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+        <Form.Label column sm="2">
+          Price
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control name="price" plaintext readOnly defaultValue="0" value={priceHandler} />
+        </Col>
+      </Form.Group>
+
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{existingBooking.id ? 'Update' : 'Create'} Booking</Button>
     </Form>
@@ -123,6 +153,7 @@ FlightBookingForm.propTypes = {
     id: PropTypes.number,
     date: PropTypes.string,
     payment_method: PropTypes.string,
+    price: PropTypes.number,
     flight_id: PropTypes.shape({
       id: PropTypes.number,
     }),
