@@ -23,19 +23,19 @@ const BookingCard = ({
   // }, []);
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className="card-space" style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{user.first_name} {user.last_name} flying from {flightname}</Card.Title>
+        <Card.Title className="nav-text">{user.first_name} {user.last_name} flying from {flightname}</Card.Title>
         {/* <Card.Subtitle className="mb-2 text-muted">(CustomerId) departing on flight (flightId)</Card.Subtitle> */}
         <Card.Text>
           Departure Date: {date}
         </Card.Text>
         <Card.Subtitle className="mb-2 text-muted"> Payment: ${cost} using {paymentMethod} </Card.Subtitle>
         <Link href={`/bookings/edit/${obj.id}`} passHref>
-          <Button variant="primary">Edit Booking</Button>
+          <Button variant="dark" className="btn-outline-light">Edit Booking</Button>
         </Link>
 
-        <Button variant="danger" onClick={deleteThisBooking}>Cancel Flight</Button>
+        <Button variant="light" className="btn btn-outline-danger" onClick={deleteThisBooking}>Cancel Flight</Button>
       </Card.Body>
     </Card>
   );

@@ -38,7 +38,7 @@ function SearchFlights() {
 
   return (
     <div>
-      <h1>Search Flights to Book: </h1>
+      <h1 className="raj-text card-space">Search Flights to Book: </h1>
       <div className="selection-container">
         <Form>
           <FloatingLabel controlId="floatingInput1" label="Departure Airport" className="mb-3">
