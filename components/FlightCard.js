@@ -16,7 +16,7 @@ const FlightCard = ({
   }, []);
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className="card-space" style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Departing From: {departingAirport ? departingAirport.city : 'Error'}</Card.Subtitle>
@@ -25,7 +25,7 @@ const FlightCard = ({
           Price per seat: ${price}
         </Card.Text>
         <Link href={{ pathname: '/bookings/new', query: { flightId: obj.id } }} passHref>
-          <Button variant="primary">Book Flight</Button>
+          <Button variant="light" className="btn btn-outline-dark">Book Flight</Button>
         </Link>
       </Card.Body>
     </Card>

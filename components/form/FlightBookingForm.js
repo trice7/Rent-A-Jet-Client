@@ -62,7 +62,7 @@ function FlightBookingForm({ existingBooking }) {
   return (
 
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{existingBooking.id ? 'Update' : 'Create'} Booking</h2>
+      <h2 className="text-white mt-5 raj-text">{existingBooking.id ? 'Update' : 'Create'} Flight Booking</h2>
       <FloatingLabel controlId="floatingInput1" label="Flight Name" className="mb-3">
         <Form.Select
           aria-label="Flight Name"
@@ -113,7 +113,7 @@ function FlightBookingForm({ existingBooking }) {
       </FloatingLabel>
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{existingBooking.id ? 'Update' : 'Create'} Booking</Button>
+      <Button variant="light" className="btn-outline-dark" type="submit">{existingBooking.id ? 'Update' : 'Create'} Booking</Button>
     </Form>
   );
 }

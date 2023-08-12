@@ -26,12 +26,11 @@ export default function Profile() {
   }, [formData.searchTerm]);
 
   return (
-    <div className="text-center my-4">
-      <div className="d-flex flex-wrap">
-        <UserCard userObj={user} />
-
-        <Form.Text className="text-muted">Search by City or Airport code</Form.Text>
-        <Form.Control as="textarea" name="searchTerm" required placeholder="Enter arrival or departure city/airport code" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
+    <div className="text-center raj-container">
+      <UserCard userObj={user} />
+      <Form.Text className="raj-text text-white card-space">Search by City or Airport code:</Form.Text>
+      <Form.Control as="textarea" name="searchTerm" required placeholder="Enter arrival or departure city/airport code" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
+      <div className="column-card">
         {bookings?.map((card) => (
           <BookingCard key={card.id} obj={card} paymentMethod={card.payment_method} flightname={card.flight_id.name} date={card.date} onUpdate={userFlightBookings} cost={card.flight_id.price} />
         ))}

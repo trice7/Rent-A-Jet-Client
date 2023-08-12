@@ -18,5 +18,48 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color:rgb(45, 103, 161);
+  color: whitesmoke;
+}
+
+.nav-bar {
+  background-color:rgb(108, 150, 200);
+}
+
+.logo-text {
+  font-family: 'Righteous';
+  font-size: 40px;
+}
+
+.nav-text {
+  font-family: 'Bricolage Grotesque';
+}
+
+.raj-text {
+  font-family: 'Roboto Condensed';
+}
+
+.card-space {
+  margin: 15px 15px 15px 15px;
+}
+
+.text-white {
+  color: white;
+  font-size: 20px;
+}
+
+.center {
+  align-self: center;
+}
+
+.raj-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.column-card {
+  display: flex;
+  flex-direction: row;
 }
