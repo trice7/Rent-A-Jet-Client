@@ -2,14 +2,14 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import FlightCard from '../components/FlightCard';
-import { getAllFlights } from '../api/flightData';
+import { getFlightsByDeparture } from '../api/flightData';
 
 function Home() {
   const { user } = useAuth(); // TODO: COMMENT IN FOR AUTH
   const [flights, setFlights] = useState([]);
 
   useEffect(() => {
-    getAllFlights().then(setFlights);
+    getFlightsByDeparture(user.home_airport.id).then(setFlights);
   }, []);
 
   return (
@@ -22,10 +22,13 @@ function Home() {
       //   margin: '0 auto',
       // }}
     >
-      <h1>Hello {user.first_name}! </h1>
-      {flights ? flights.map((flight) => (
-        <FlightCard key={flight.id} name={flight.name} obj={flight} departureAirportId={flight.departure_airport_id.id} destinationAirportId={flight.destination_airport_id.id} price={flight.price} />
-      )) : 'No flights retrieved'}
+      <h1>Hello {user.first_name} {user.last_name} </h1>
+      <h4>Browse flights departing from your home airport:</h4>
+      <div className="d-flex">
+        {flights ? flights.map((flight) => (
+          <FlightCard key={flight.id} name={flight.name} obj={flight} departureAirportId={flight.departure_airport_id.id} destinationAirportId={flight.destination_airport_id.id} price={flight.price} />
+        )) : 'No flights retrieved'}
+      </div>
     </div>
   );
 }
